@@ -28,4 +28,12 @@ export default tseslint.config([
       ],
     },
   },
+  {
+    // Componentes gerados pelo shadcn/ui exportam variantes (cva) junto do
+    // componente por design; não são editados manualmente com frequência.
+    files: ['src/components/ui/**/*.{ts,tsx}'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
 ])
