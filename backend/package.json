@@ -1,5 +1,5 @@
 {
-  "name": "cinescope-server",
+  "name": "cinescope-backend",
   "private": true,
   "version": "0.0.0",
   "description": "API do CineScope: autenticação, favoritos e avaliações persistidos em PostgreSQL.",
