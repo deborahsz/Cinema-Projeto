@@ -4,6 +4,7 @@ import { Menu, UserRound } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { SearchBar } from '@/features/search/components/SearchBar'
+import { Logo } from '@/components/layout/Logo'
 import { cn } from '@/lib/utils'
 import { paths } from '@/routes/paths'
 import { useScrolled } from '@/hooks/useScrolled'
@@ -27,23 +28,17 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        'fixed inset-x-0 top-0 z-50 transition-colors duration-300',
+        'fixed inset-x-0 top-0 z-50 transition-all duration-300',
         scrolled
-          ? 'border-b border-border bg-background/80 backdrop-blur-lg'
-          : 'border-b border-transparent bg-gradient-to-b from-background/80 to-transparent',
+          ? 'border-b border-border/80 bg-background/70 backdrop-blur-xl'
+          : 'border-b border-transparent bg-gradient-to-b from-background/90 to-transparent',
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
         <div className="flex items-center gap-8">
-          <Link
-            to={paths.home}
-            onClick={scrollToTop}
-            className="font-display text-xl font-bold text-foreground"
-          >
-            Cine<span className="text-primary">Scope</span>
-          </Link>
+          <Logo onClick={scrollToTop} />
 
-          <nav className="hidden items-center gap-6 md:flex">
+          <nav className="hidden items-center gap-1 md:flex">
             {navLinks.map((link) => (
               <NavLink
                 key={link.to}
@@ -51,8 +46,9 @@ export function Navbar() {
                 onClick={scrollToTop}
                 className={({ isActive }) =>
                   cn(
-                    'rounded-md text-sm font-medium text-muted-foreground transition-colors hover:text-foreground',
-                    isActive && 'text-foreground',
+                    'relative rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground',
+                    'after:absolute after:inset-x-3 after:-bottom-px after:h-0.5 after:origin-left after:scale-x-0 after:rounded-full after:bg-primary after:transition-transform hover:after:scale-x-100',
+                    isActive && 'text-foreground after:scale-x-100',
                   )
                 }
               >

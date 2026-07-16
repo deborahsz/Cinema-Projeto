@@ -125,6 +125,14 @@
     @apply bg-background text-foreground font-sans antialiased;
   }
 
+  /* Brilho radial sutil de fundo, dando profundidade ao tema escuro. */
+  .dark body {
+    background-image:
+      radial-gradient(60rem 60rem at 85% -10%, rgba(229, 9, 20, 0.12), transparent 55%),
+      radial-gradient(50rem 50rem at 0% 0%, rgba(120, 80, 255, 0.08), transparent 50%);
+    background-attachment: fixed;
+  }
+
   #root {
     min-height: 100svh;
   }
@@ -154,5 +162,72 @@
   button:not(:disabled),
   [role='button']:not(:disabled) {
     cursor: pointer;
+  }
+}
+
+@layer utilities {
+  /* Texto com gradiente de marca (headings de destaque). */
+  .text-gradient {
+    background-image: linear-gradient(120deg, var(--foreground) 30%, var(--muted-foreground));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-gradient-primary {
+    background-image: linear-gradient(120deg, #ff5a5f, var(--primary) 55%, #b0060e);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Superfície "vidro" com blur e borda sutil. */
+  .glass {
+    background-color: color-mix(in oklab, var(--card) 70%, transparent);
+    backdrop-filter: blur(12px);
+    border: 1px solid color-mix(in oklab, var(--border) 80%, transparent);
+  }
+
+  /* Barra de destaque usada nos títulos de seção. */
+  .section-accent {
+    position: relative;
+    padding-left: 0.85rem;
+  }
+
+  .section-accent::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.15em;
+    bottom: 0.15em;
+    width: 4px;
+    border-radius: 999px;
+    background: linear-gradient(to bottom, var(--primary), #ff5a5f);
+  }
+
+  /* Skeleton com brilho deslizante (shimmer). */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in oklab, var(--foreground) 8%, transparent),
+      transparent
+    );
+    animation: shimmer 1.6s infinite;
+  }
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
   }
 }

@@ -1,0 +1,14 @@
+# Normaliza todos os arquivos de texto para LF no repositório, independente do
+# sistema operacional de quem clona. Evita diffs "fantasmas" só por causa de
+# quebra de linha (comum em times com Windows + Mac/Linux).
+* text=auto eol=lf
+
+# Arquivos binários: nunca fazer conversão de fim de linha.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary

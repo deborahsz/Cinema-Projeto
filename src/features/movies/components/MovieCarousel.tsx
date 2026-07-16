@@ -35,9 +35,11 @@ export function MovieCarousel({
 
   return (
     <section className="py-6">
-      <div className="mx-auto mb-4 flex max-w-7xl items-end justify-between gap-4 px-4 sm:px-6">
-        <div>
-          <h2 className="font-display text-xl font-bold text-foreground sm:text-2xl">{title}</h2>
+      <div className="mx-auto mb-5 flex max-w-7xl items-end justify-between gap-4 px-4 sm:px-6">
+        <div className="section-accent">
+          <h2 className="font-display text-xl font-bold tracking-tight text-foreground sm:text-2xl">
+            {title}
+          </h2>
           {description && <p className="mt-0.5 text-sm text-muted-foreground">{description}</p>}
         </div>
         {action}

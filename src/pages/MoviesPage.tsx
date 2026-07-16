@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Loader2, SearchX } from 'lucide-react'
 import { MovieGrid } from '@/features/movies/components/MovieGrid'
+import { PageHeader } from '@/components/layout/PageHeader'
 import { MovieFilters, type MovieFiltersState } from '@/features/movies/components/MovieFilters'
 import { useDiscoverMovies } from '@/features/movies/hooks/useDiscoverMovies'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
@@ -31,13 +32,11 @@ export function MoviesPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-      <div className="mb-6 flex flex-col gap-4">
-        <div>
-          <h1 className="font-display text-2xl font-bold text-foreground">Explorar filmes</h1>
-          <p className="mt-0.5 text-sm text-muted-foreground">
-            Filtre por gênero, ano e ordenação. Role para carregar mais.
-          </p>
-        </div>
+      <PageHeader
+        title="Explorar filmes"
+        description="Filtre por gênero, ano e ordenação. Role para carregar mais."
+      />
+      <div className="mb-8">
         <MovieFilters filters={filters} onChange={setFilters} />
       </div>
 

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { HeartCrack, Trash2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { MovieGrid } from '@/features/movies/components/MovieGrid'
+import { PageHeader } from '@/components/layout/PageHeader'
 import { useFavorites } from '@/features/favorites/context/favorites-context'
 import { paths } from '@/routes/paths'
 
@@ -11,23 +12,18 @@ export function FavoritesPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-      <div className="mb-6 flex items-center justify-between gap-4">
-        <div>
-          <h1 className="font-display text-2xl font-bold text-foreground">Meus favoritos</h1>
-          {!isEmpty && (
-            <p className="mt-0.5 text-sm text-muted-foreground">
-              {favorites.length} filme(s) salvo(s)
-            </p>
-          )}
-        </div>
-
-        {!isEmpty && (
-          <Button variant="ghost" size="sm" onClick={clearFavorites}>
-            <Trash2 />
-            Limpar tudo
-          </Button>
-        )}
-      </div>
+      <PageHeader
+        title="Meus favoritos"
+        description={isEmpty ? undefined : `${favorites.length} filme(s) salvo(s)`}
+        action={
+          !isEmpty && (
+            <Button variant="ghost" size="sm" onClick={clearFavorites}>
+              <Trash2 />
+              Limpar tudo
+            </Button>
+          )
+        }
+      />
 
       {isEmpty ? (
         <div className="flex flex-col items-center gap-4 py-20 text-center">

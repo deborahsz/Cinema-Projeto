@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import { Search, SearchX } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { MovieGrid } from '@/features/movies/components/MovieGrid'
+import { PageHeader } from '@/components/layout/PageHeader'
 import { useSearchMovies } from '@/features/movies/hooks/useMovies'
 import { useDebounce } from '@/hooks/useDebounce'
 
@@ -26,9 +27,9 @@ export function SearchPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-      <h1 className="font-display text-2xl font-bold text-foreground">Buscar filmes</h1>
+      <PageHeader title="Buscar filmes" description="Encontre qualquer filme do acervo do TMDB." />
 
-      <div className="relative mt-4 max-w-xl">
+      <div className="relative max-w-xl">
         <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
         <Input
           autoFocus

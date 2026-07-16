@@ -20,7 +20,7 @@ export function HomePage() {
         <HeroBanner movies={trending.data?.results} isLoading={trending.isPending} />
       </div>
 
-      <div className="flex flex-col divide-y divide-border">
+      <div className="relative z-10 -mt-8 flex flex-col gap-4 pb-8">
         <MovieCarousel
           title="Em alta esta semana"
           movies={trending.data?.results}
