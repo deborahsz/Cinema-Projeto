@@ -29,11 +29,13 @@ export default tseslint.config([
     },
   },
   {
-    // Componentes gerados pelo shadcn/ui exportam variantes (cva) junto do
-    // componente por design; não são editados manualmente com frequência.
+    // Componentes gerados pelo shadcn/ui: código de terceiros, copiado como
+    // está pela CLI. Não aplicamos nossas regras de lint mais estritas aqui
+    // (mesmo critério usado pelo próprio time do shadcn/ui).
     files: ['src/components/ui/**/*.{ts,tsx}'],
     rules: {
       'react-refresh/only-export-components': 'off',
+      'react-hooks/set-state-in-effect': 'off',
     },
   },
 ])

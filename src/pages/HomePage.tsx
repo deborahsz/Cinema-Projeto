@@ -1,48 +1,50 @@
-import { useTrendingMovies } from '@/features/movies/hooks/useMovies'
-import { getTmdbImageUrl } from '@/utils/tmdb-image'
-import { Skeleton } from '@/components/ui/skeleton'
+import { HeroBanner } from '@/features/movies/components/HeroBanner'
+import { MovieCarousel } from '@/features/movies/components/MovieCarousel'
+import {
+  useNowPlayingMovies,
+  usePopularMovies,
+  useTopRatedMovies,
+  useTrendingMovies,
+} from '@/features/movies/hooks/useMovies'
 
 export function HomePage() {
-  const { data, isPending, isError } = useTrendingMovies('week')
+  const trending = useTrendingMovies('week')
+  const popular = usePopularMovies()
+  const topRated = useTopRatedMovies()
+  const nowPlaying = useNowPlayingMovies()
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-      <div className="mb-6 flex flex-col gap-1">
-        <h1 className="font-display text-2xl font-bold text-foreground">Em alta esta semana</h1>
-        <p className="text-sm text-muted-foreground">
-          Prova de conceito da Etapa 6 (TanStack Query + TMDB) — o banner e os demais carrosséis
-          chegam na próxima etapa.
-        </p>
+    <div className="flex flex-col">
+      {/* -mt-16 cancela o padding-top do layout para o banner ficar atrás da navbar (transparente no topo) */}
+      <div className="-mt-16">
+        <HeroBanner movies={trending.data?.results} isLoading={trending.isPending} />
       </div>
 
-      {isError && (
-        <p className="text-sm text-destructive">
-          Não foi possível carregar os filmes. Verifique sua chave da API do TMDB.
-        </p>
-      )}
-
-      <div className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-6">
-        {isPending &&
-          Array.from({ length: 12 }).map((_, index) => (
-            <Skeleton key={index} className="aspect-[2/3] w-full rounded-lg" />
-          ))}
-
-        {data?.results.slice(0, 12).map((movie) => (
-          <div key={movie.id} className="group">
-            <div className="aspect-[2/3] overflow-hidden rounded-lg bg-secondary">
-              {getTmdbImageUrl(movie.poster_path, 'w342') && (
-                <img
-                  src={getTmdbImageUrl(movie.poster_path, 'w342')!}
-                  alt={movie.title}
-                  loading="lazy"
-                  className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              )}
-            </div>
-            <p className="mt-2 truncate text-sm font-medium text-foreground">{movie.title}</p>
-            <p className="text-xs text-muted-foreground">&#9733; {movie.vote_average.toFixed(1)}</p>
-          </div>
-        ))}
+      <div className="flex flex-col divide-y divide-border">
+        <MovieCarousel
+          title="Em alta esta semana"
+          movies={trending.data?.results}
+          isLoading={trending.isPending}
+          isError={trending.isError}
+        />
+        <MovieCarousel
+          title="Mais populares"
+          movies={popular.data?.results}
+          isLoading={popular.isPending}
+          isError={popular.isError}
+        />
+        <MovieCarousel
+          title="Melhores avaliados"
+          movies={topRated.data?.results}
+          isLoading={topRated.isPending}
+          isError={topRated.isError}
+        />
+        <MovieCarousel
+          title="Lançamentos"
+          movies={nowPlaying.data?.results}
+          isLoading={nowPlaying.isPending}
+          isError={nowPlaying.isError}
+        />
       </div>
     </div>
   )
