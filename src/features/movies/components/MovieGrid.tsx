@@ -1,9 +1,9 @@
 import { MovieCard } from '@/features/movies/components/MovieCard'
 import { MovieCardSkeleton } from '@/features/movies/components/MovieCardSkeleton'
-import type { Movie } from '@/types/movie'
+import type { MovieSummary } from '@/types/movie'
 
 interface MovieGridProps {
-  movies?: Movie[]
+  movies?: MovieSummary[]
   isLoading?: boolean
   skeletonCount?: number
 }

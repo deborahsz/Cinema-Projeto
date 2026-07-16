@@ -4,10 +4,11 @@ import { motion } from 'framer-motion'
 import { paths } from '@/routes/paths'
 import { getTmdbImageUrl } from '@/utils/tmdb-image'
 import { cn } from '@/lib/utils'
-import type { Movie } from '@/types/movie'
+import { FavoriteButton } from '@/features/favorites/components/FavoriteButton'
+import type { MovieSummary } from '@/types/movie'
 
 interface MovieCardProps {
-  movie: Movie
+  movie: MovieSummary
   className?: string
 }
 
@@ -52,6 +53,11 @@ export function MovieCard({ movie, className }: MovieCardProps) {
             <Star className="size-3 fill-rating text-rating" />
             {movie.vote_average > 0 ? movie.vote_average.toFixed(1) : '—'}
           </div>
+
+          <FavoriteButton
+            movie={movie}
+            className="absolute top-2 left-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100 focus-visible:opacity-100"
+          />
         </div>
 
         <p className="mt-2 truncate text-sm font-medium text-foreground">{movie.title}</p>

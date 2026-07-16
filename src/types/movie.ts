@@ -20,6 +20,15 @@ export interface Movie {
   original_language: string
 }
 
+/**
+ * Subconjunto de campos suficiente para renderizar um card ou item de favorito.
+ * Tanto `Movie` quanto `MovieDetails` são compatíveis com este tipo.
+ */
+export type MovieSummary = Pick<
+  Movie,
+  'id' | 'title' | 'poster_path' | 'vote_average' | 'release_date'
+>
+
 /** Formato retornado por /movie/{id}, com dados adicionais */
 export interface MovieDetails extends Omit<Movie, 'genre_ids'> {
   genres: Genre[]

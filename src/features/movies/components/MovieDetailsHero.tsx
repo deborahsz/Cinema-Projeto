@@ -3,6 +3,7 @@ import { Calendar, Clock, Play, Star } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { TrailerDialog } from '@/features/movies/components/TrailerDialog'
+import { FavoriteButton } from '@/features/favorites/components/FavoriteButton'
 import { getTmdbImageUrl } from '@/utils/tmdb-image'
 import { formatRuntime, formatYear } from '@/utils/format'
 import type { MovieDetails, MovieVideo } from '@/types/movie'
@@ -98,16 +99,17 @@ export function MovieDetailsHero({ movie, director, trailer }: MovieDetailsHeroP
               </p>
             )}
 
-            {trailer && (
-              <div className="mt-6">
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              {trailer && (
                 <TrailerDialog trailer={trailer} title={movie.title}>
                   <Button size="lg">
                     <Play className="fill-current" />
                     Assistir trailer
                   </Button>
                 </TrailerDialog>
-              </div>
-            )}
+              )}
+              <FavoriteButton movie={movie} variant="full" />
+            </div>
           </motion.div>
         </div>
       </div>

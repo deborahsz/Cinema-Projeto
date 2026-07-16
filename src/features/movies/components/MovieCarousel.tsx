@@ -8,12 +8,12 @@ import {
 } from '@/components/ui/carousel'
 import { MovieCard } from '@/features/movies/components/MovieCard'
 import { MovieCardSkeleton } from '@/features/movies/components/MovieCardSkeleton'
-import type { Movie } from '@/types/movie'
+import type { MovieSummary } from '@/types/movie'
 
 interface MovieCarouselProps {
   title: string
   description?: string
-  movies?: Movie[]
+  movies?: MovieSummary[]
   isLoading?: boolean
   isError?: boolean
   emptyMessage?: string
