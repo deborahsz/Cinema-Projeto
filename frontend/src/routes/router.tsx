@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { RootLayout } from '@/components/layout/RootLayout'
 import { RouteErrorPage } from '@/pages/RouteErrorPage'
+import { ProtectedRoute } from '@/components/common/ProtectedRoute'
 import { paths } from '@/routes/paths'
 
 export const router = createBrowserRouter([
@@ -51,11 +52,30 @@ export const router = createBrowserRouter([
         },
       },
       {
-        path: paths.profile,
+        path: paths.login,
         lazy: async () => {
-          const { ProfilePage } = await import('@/pages/ProfilePage')
-          return { Component: ProfilePage }
+          const { LoginPage } = await import('@/pages/LoginPage')
+          return { Component: LoginPage }
         },
+      },
+      {
+        path: paths.register,
+        lazy: async () => {
+          const { RegisterPage } = await import('@/pages/RegisterPage')
+          return { Component: RegisterPage }
+        },
+      },
+      {
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: paths.profile,
+            lazy: async () => {
+              const { ProfilePage } = await import('@/pages/ProfilePage')
+              return { Component: ProfilePage }
+            },
+          },
+        ],
       },
       {
         path: '*',

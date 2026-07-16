@@ -10,4 +10,6 @@ export const paths = {
   movieDetails: (id: string | number = ':id') => `/movie/${id}`,
   about: '/about',
   profile: '/profile',
+  login: '/login',
+  register: '/register',
 } as const

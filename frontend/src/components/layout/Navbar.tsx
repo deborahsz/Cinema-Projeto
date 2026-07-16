@@ -1,13 +1,15 @@
 import { useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
-import { Menu, UserRound } from 'lucide-react'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { LogOut, Menu, UserRound } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { SearchBar } from '@/features/search/components/SearchBar'
 import { Logo } from '@/components/layout/Logo'
 import { cn } from '@/lib/utils'
 import { paths } from '@/routes/paths'
 import { useScrolled } from '@/hooks/useScrolled'
+import { useAuth } from '@/features/auth/context/auth-context'
 
 const navLinks = [
   { label: 'Início', to: paths.home },
@@ -24,6 +26,13 @@ export function Navbar() {
   const scrolled = useScrolled()
   const { pathname } = useLocation()
   const isSearchPage = pathname === paths.search
+  const { user, status, logout } = useAuth()
+  const navigate = useNavigate()
+
+  function handleLogout() {
+    logout()
+    navigate(paths.home)
+  }
 
   return (
     <header
@@ -61,11 +70,22 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           {!isSearchPage && <SearchBar className="hidden w-56 sm:block" />}
 
-          <Button variant="ghost" size="icon" asChild aria-label="Perfil">
-            <Link to={paths.profile}>
-              <UserRound />
-            </Link>
-          </Button>
+          {status === 'authenticated' ? (
+            <div className="hidden items-center gap-1 sm:flex">
+              <Button variant="ghost" size="icon" asChild aria-label={`Perfil de ${user?.name}`}>
+                <Link to={paths.profile}>
+                  <UserRound />
+                </Link>
+              </Button>
+              <Button variant="ghost" size="icon" aria-label="Sair" onClick={handleLogout}>
+                <LogOut />
+              </Button>
+            </div>
+          ) : (
+            <Button variant="ghost" size="sm" asChild className="hidden sm:inline-flex">
+              <Link to={paths.login}>Entrar</Link>
+            </Button>
+          )}
 
           <MobileMenu />
         </div>
@@ -76,6 +96,14 @@ export function Navbar() {
 
 function MobileMenu() {
   const [open, setOpen] = useState(false)
+  const { user, status, logout } = useAuth()
+  const navigate = useNavigate()
+
+  function handleLogout() {
+    logout()
+    setOpen(false)
+    navigate(paths.home)
+  }
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -105,6 +133,49 @@ function MobileMenu() {
               {link.label}
             </NavLink>
           ))}
+
+          <Separator className="my-2" />
+
+          {status === 'authenticated' ? (
+            <>
+              <NavLink
+                to={paths.profile}
+                onClick={() => setOpen(false)}
+                className={({ isActive }) =>
+                  cn(
+                    'rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground',
+                    isActive && 'bg-secondary text-foreground',
+                  )
+                }
+              >
+                {user?.name ?? 'Perfil'}
+              </NavLink>
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="rounded-md px-3 py-2 text-left text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+              >
+                Sair
+              </button>
+            </>
+          ) : (
+            <>
+              <NavLink
+                to={paths.login}
+                onClick={() => setOpen(false)}
+                className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+              >
+                Entrar
+              </NavLink>
+              <NavLink
+                to={paths.register}
+                onClick={() => setOpen(false)}
+                className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+              >
+                Cadastrar
+              </NavLink>
+            </>
+          )}
         </div>
       </SheetContent>
     </Sheet>
