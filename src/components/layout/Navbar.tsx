@@ -1,9 +1,9 @@
-import { type FormEvent, useState } from 'react'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { Menu, Search, UserRound } from 'lucide-react'
+import { useState } from 'react'
+import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Menu, UserRound } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import { SearchBar } from '@/features/search/components/SearchBar'
 import { cn } from '@/lib/utils'
 import { paths } from '@/routes/paths'
 import { useScrolled } from '@/hooks/useScrolled'
@@ -14,8 +14,14 @@ const navLinks = [
   { label: 'Sobre', to: paths.about },
 ]
 
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
 export function Navbar() {
   const scrolled = useScrolled()
+  const { pathname } = useLocation()
+  const isSearchPage = pathname === paths.search
 
   return (
     <header
@@ -28,7 +34,11 @@ export function Navbar() {
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
         <div className="flex items-center gap-8">
-          <Link to={paths.home} className="font-display text-xl font-bold text-foreground">
+          <Link
+            to={paths.home}
+            onClick={scrollToTop}
+            className="font-display text-xl font-bold text-foreground"
+          >
             Cine<span className="text-primary">Scope</span>
           </Link>
 
@@ -37,9 +47,10 @@ export function Navbar() {
               <NavLink
                 key={link.to}
                 to={link.to}
+                onClick={scrollToTop}
                 className={({ isActive }) =>
                   cn(
-                    'text-sm font-medium text-muted-foreground transition-colors hover:text-foreground',
+                    'rounded-md text-sm font-medium text-muted-foreground transition-colors hover:text-foreground',
                     isActive && 'text-foreground',
                   )
                 }
@@ -51,7 +62,7 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-2">
-          <SearchForm className="hidden sm:block" />
+          {!isSearchPage && <SearchBar className="hidden w-56 sm:block" />}
 
           <Button variant="ghost" size="icon" asChild aria-label="Perfil">
             <Link to={paths.profile}>
@@ -63,30 +74,6 @@ export function Navbar() {
         </div>
       </div>
     </header>
-  )
-}
-
-function SearchForm({ className }: { className?: string }) {
-  const [value, setValue] = useState('')
-  const navigate = useNavigate()
-
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    if (!value.trim()) return
-    navigate(`${paths.search}?q=${encodeURIComponent(value.trim())}`)
-  }
-
-  return (
-    <form onSubmit={handleSubmit} className={cn('relative w-56', className)}>
-      <Search className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
-      <Input
-        value={value}
-        onChange={(event) => setValue(event.target.value)}
-        placeholder="Buscar filmes..."
-        className="pl-9"
-        aria-label="Buscar filmes"
-      />
-    </form>
   )
 }
 
@@ -105,7 +92,7 @@ function MobileMenu() {
           Cine<span className="text-primary">Scope</span>
         </SheetTitle>
         <div className="flex flex-col gap-1 p-4">
-          <SearchForm className="mb-4 w-full" />
+          <SearchBar className="mb-4 w-full" onSearch={() => setOpen(false)} />
           {navLinks.map((link) => (
             <NavLink
               key={link.to}
