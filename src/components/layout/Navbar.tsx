@@ -10,6 +10,7 @@ import { useScrolled } from '@/hooks/useScrolled'
 
 const navLinks = [
   { label: 'Início', to: paths.home },
+  { label: 'Filmes', to: paths.movies },
   { label: 'Favoritos', to: paths.favorites },
   { label: 'Sobre', to: paths.about },
 ]

@@ -4,6 +4,7 @@
  */
 export const paths = {
   home: '/',
+  movies: '/movies',
   search: '/search',
   favorites: '/favorites',
   movieDetails: (id: string | number = ':id') => `/movie/${id}`,

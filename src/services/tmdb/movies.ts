@@ -1,5 +1,6 @@
 import { tmdbClient } from '@/services/tmdb/client'
 import type {
+  DiscoverMoviesParams,
   Genre,
   Movie,
   MovieCredits,
@@ -65,6 +66,25 @@ export async function getMovieVideos(id: number | string) {
 export async function getMovieRecommendations(id: number | string, page = 1) {
   const { data } = await tmdbClient.get<PaginatedResponse<Movie>>(`/movie/${id}/recommendations`, {
     params: { page },
+  })
+  return data
+}
+
+export async function getDiscoverMovies({
+  page = 1,
+  genreId,
+  sortBy = 'popularity.desc',
+  year,
+}: DiscoverMoviesParams) {
+  const { data } = await tmdbClient.get<PaginatedResponse<Movie>>('/discover/movie', {
+    params: {
+      page,
+      sort_by: sortBy,
+      include_adult: false,
+      'vote_count.gte': sortBy === 'vote_average.desc' ? 200 : undefined,
+      with_genres: genreId ?? undefined,
+      primary_release_year: year ?? undefined,
+    },
   })
   return data
 }

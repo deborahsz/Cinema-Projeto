@@ -78,3 +78,13 @@ export interface PaginatedResponse<T> {
 }
 
 export type TrendingTimeWindow = 'day' | 'week'
+
+export type MovieSortOption =
+  'popularity.desc' | 'vote_average.desc' | 'primary_release_date.desc' | 'title.asc'
+
+export interface DiscoverMoviesParams {
+  page?: number
+  genreId?: number | null
+  sortBy?: MovieSortOption
+  year?: number | null
+}

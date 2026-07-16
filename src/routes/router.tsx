@@ -21,6 +21,13 @@ export const router = createBrowserRouter([
         },
       },
       {
+        path: paths.movies,
+        lazy: async () => {
+          const { MoviesPage } = await import('@/pages/MoviesPage')
+          return { Component: MoviesPage }
+        },
+      },
+      {
         path: paths.search,
         lazy: async () => {
           const { SearchPage } = await import('@/pages/SearchPage')

@@ -1,4 +1,4 @@
-import type { TrendingTimeWindow } from '@/types/movie'
+import type { DiscoverMoviesParams, TrendingTimeWindow } from '@/types/movie'
 
 /**
  * Factory de query keys do TanStack Query. Centralizar aqui evita chaves
@@ -19,4 +19,6 @@ export const movieKeys = {
   recommendations: (id: number | string, page: number) =>
     [...movieKeys.all, 'recommendations', id, page] as const,
   search: (query: string, page: number) => [...movieKeys.all, 'search', query, page] as const,
+  discover: (params: Omit<DiscoverMoviesParams, 'page'>) =>
+    [...movieKeys.all, 'discover', params] as const,
 }
