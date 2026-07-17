@@ -3,6 +3,7 @@ import { MovieDetailsHero } from '@/features/movies/components/MovieDetailsHero'
 import { MovieDetailsSkeleton } from '@/features/movies/components/MovieDetailsSkeleton'
 import { CastList } from '@/features/movies/components/CastList'
 import { MovieCarousel } from '@/features/movies/components/MovieCarousel'
+import { MovieRating } from '@/features/ratings/components/MovieRating'
 import {
   useMovieCredits,
   useMovieDetails,
@@ -35,6 +36,10 @@ export function MovieDetailsPage() {
   return (
     <div className="flex flex-col gap-12 pb-12">
       <MovieDetailsHero movie={details.data} director={director} trailer={trailer} />
+
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
+        <MovieRating movieId={details.data.id} />
+      </div>
 
       {credits.data && credits.data.cast.length > 0 && (
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
