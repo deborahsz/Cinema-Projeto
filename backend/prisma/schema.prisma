@@ -25,12 +25,17 @@ model User {
   @@map("users")
 }
 
-/// Filme favoritado por um usuário. Guardamos apenas o id do filme na TMDB
-/// (os detalhes — pôster, título, sinopse — continuam vindo da API da TMDB).
+/// Filme favoritado por um usuário. Além do id da TMDB, guardamos um resumo
+/// dos metadados (título, pôster, nota, data) para renderizar a lista de
+/// favoritos sem precisar de novas chamadas à API da TMDB.
 model Favorite {
-  id        String   @id @default(cuid())
-  movieId   Int
-  createdAt DateTime @default(now())
+  id          String   @id @default(cuid())
+  movieId     Int
+  title       String
+  posterPath  String?
+  voteAverage Float    @default(0)
+  releaseDate String?
+  createdAt   DateTime @default(now())
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
