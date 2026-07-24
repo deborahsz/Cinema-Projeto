@@ -1,0 +1,67 @@
+// Schema do banco de dados do CineScope.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// Usuário da aplicação. Cada usuário pode ter vários filmes favoritos e
+/// avaliações pessoais.
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  favorites Favorite[]
+  ratings   Rating[]
+
+  @@map("users")
+}
+
+/// Filme favoritado por um usuário. Além do id da TMDB, guardamos um resumo
+/// dos metadados (título, pôster, nota, data) para renderizar a lista de
+/// favoritos sem precisar de novas chamadas à API da TMDB.
+model Favorite {
+  id          String   @id @default(cuid())
+  movieId     Int
+  title       String
+  posterPath  String?
+  voteAverage Float    @default(0)
+  releaseDate String?
+  createdAt   DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, movieId])
+  @@index([userId])
+  @@map("favorites")
+}
+
+/// Avaliação pessoal (nota de 1 a 10, equivalente a 0.5–5 estrelas) que um
+/// usuário dá a um filme da TMDB. Guardamos título e pôster para listar no
+/// perfil sem novas chamadas à TMDB. Uma avaliação por usuário/filme.
+model Rating {
+  id         String   @id @default(cuid())
+  movieId    Int
+  title      String   @default("")
+  posterPath String?
+  score      Int
+  comment    String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, movieId])
+  @@index([userId])
+  @@map("ratings")
+}
