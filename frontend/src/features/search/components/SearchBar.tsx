@@ -56,7 +56,7 @@ export function SearchBar({ className, autoFocus, onSearch }: SearchBarProps) {
         value={value}
         onChange={(event) => setValue(event.target.value)}
         placeholder="Buscar filmes..."
-        className="pl-9"
+        className="h-10 pl-9"
         aria-label="Buscar filmes"
       />
     </form>

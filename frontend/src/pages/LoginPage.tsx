@@ -47,7 +47,7 @@ export function LoginPage() {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="glass w-full max-w-sm rounded-2xl p-8"
+        className="glass w-full max-w-sm rounded-2xl p-5 sm:p-8"
       >
         <div className="mb-8 flex flex-col items-center gap-2 text-center">
           <div className="flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary">
@@ -68,6 +68,7 @@ export function LoginPage() {
               autoComplete="email"
               placeholder="voce@email.com"
               aria-invalid={!!errors.email}
+              className="h-11"
               {...register('email')}
             />
             {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
@@ -81,6 +82,7 @@ export function LoginPage() {
               autoComplete="current-password"
               placeholder="••••••••"
               aria-invalid={!!errors.password}
+              className="h-11"
               {...register('password')}
             />
             {errors.password && (
@@ -88,7 +90,7 @@ export function LoginPage() {
             )}
           </div>
 
-          <Button type="submit" disabled={isSubmitting} className="mt-2">
+          <Button type="submit" disabled={isSubmitting} className="mt-2 h-11">
             {isSubmitting ? 'Entrando...' : 'Entrar'}
           </Button>
         </form>

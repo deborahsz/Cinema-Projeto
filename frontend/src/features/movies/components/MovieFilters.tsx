@@ -35,14 +35,14 @@ export function MovieFilters({ filters, onChange }: MovieFiltersProps) {
   const { data: genres } = useGenres()
 
   return (
-    <div className="flex flex-wrap gap-3">
+    <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
       <Select
         value={filters.genreId ? String(filters.genreId) : ALL_VALUE}
         onValueChange={(value) =>
           onChange({ ...filters, genreId: value === ALL_VALUE ? null : Number(value) })
         }
       >
-        <SelectTrigger className="w-44">
+        <SelectTrigger className="h-11 w-full sm:w-44">
           <SelectValue placeholder="Gênero" />
         </SelectTrigger>
         <SelectContent>
@@ -59,7 +59,7 @@ export function MovieFilters({ filters, onChange }: MovieFiltersProps) {
         value={filters.sortBy}
         onValueChange={(value) => onChange({ ...filters, sortBy: value as MovieSortOption })}
       >
-        <SelectTrigger className="w-48">
+        <SelectTrigger className="h-11 w-full sm:w-48">
           <SelectValue placeholder="Ordenar por" />
         </SelectTrigger>
         <SelectContent>
@@ -77,7 +77,7 @@ export function MovieFilters({ filters, onChange }: MovieFiltersProps) {
           onChange({ ...filters, year: value === ALL_VALUE ? null : Number(value) })
         }
       >
-        <SelectTrigger className="w-32">
+        <SelectTrigger className="h-11 w-full sm:w-32">
           <SelectValue placeholder="Ano" />
         </SelectTrigger>
         <SelectContent>

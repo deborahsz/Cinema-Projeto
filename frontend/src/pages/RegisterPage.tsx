@@ -44,7 +44,7 @@ export function RegisterPage() {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="glass w-full max-w-sm rounded-2xl p-8"
+        className="glass w-full max-w-sm rounded-2xl p-5 sm:p-8"
       >
         <div className="mb-8 flex flex-col items-center gap-2 text-center">
           <div className="flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary">
@@ -64,6 +64,7 @@ export function RegisterPage() {
               autoComplete="name"
               placeholder="Seu nome"
               aria-invalid={!!errors.name}
+              className="h-11"
               {...register('name')}
             />
             {errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}
@@ -77,6 +78,7 @@ export function RegisterPage() {
               autoComplete="email"
               placeholder="voce@email.com"
               aria-invalid={!!errors.email}
+              className="h-11"
               {...register('email')}
             />
             {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
@@ -90,6 +92,7 @@ export function RegisterPage() {
               autoComplete="new-password"
               placeholder="••••••••"
               aria-invalid={!!errors.password}
+              className="h-11"
               {...register('password')}
             />
             {errors.password && (
@@ -105,6 +108,7 @@ export function RegisterPage() {
               autoComplete="new-password"
               placeholder="••••••••"
               aria-invalid={!!errors.confirmPassword}
+              className="h-11"
               {...register('confirmPassword')}
             />
             {errors.confirmPassword && (
@@ -112,7 +116,7 @@ export function RegisterPage() {
             )}
           </div>
 
-          <Button type="submit" disabled={isSubmitting} className="mt-2">
+          <Button type="submit" disabled={isSubmitting} className="mt-2 h-11">
             {isSubmitting ? 'Criando conta...' : 'Criar conta'}
           </Button>
         </form>

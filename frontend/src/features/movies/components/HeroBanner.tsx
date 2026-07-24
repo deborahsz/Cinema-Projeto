@@ -93,7 +93,7 @@ export function HeroBanner({ movies, isLoading }: HeroBannerProps) {
               Em destaque
             </span>
 
-            <h1 className="mt-4 font-display text-4xl leading-[1.05] font-extrabold tracking-tight text-white drop-shadow-2xl sm:text-6xl">
+            <h1 className="mt-4 line-clamp-3 font-display text-3xl leading-[1.05] font-extrabold tracking-tight text-white drop-shadow-2xl break-words sm:text-5xl lg:text-6xl">
               {movie.title}
             </h1>
 
@@ -124,7 +124,11 @@ export function HeroBanner({ movies, isLoading }: HeroBannerProps) {
             </p>
 
             <div className="mt-7 flex flex-wrap items-center gap-3">
-              <Button asChild size="lg" className="shadow-lg shadow-primary/25">
+              <Button
+                asChild
+                size="lg"
+                className="h-11 w-full shadow-lg shadow-primary/25 sm:w-auto"
+              >
                 <Link to={paths.movieDetails(movie.id)}>
                   <Play className="fill-current" />
                   Assistir trailer
@@ -134,7 +138,7 @@ export function HeroBanner({ movies, isLoading }: HeroBannerProps) {
                 asChild
                 size="lg"
                 variant="secondary"
-                className="border border-white/10 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20"
+                className="h-11 w-full border border-white/10 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20 sm:w-auto"
               >
                 <Link to={paths.movieDetails(movie.id)}>
                   <Info />
@@ -147,18 +151,22 @@ export function HeroBanner({ movies, isLoading }: HeroBannerProps) {
         </AnimatePresence>
 
         {slides.length > 1 && (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             {slides.map((slide, index) => (
               <button
                 key={slide.id}
                 type="button"
                 aria-label={`Ver destaque ${index + 1}`}
                 onClick={() => setActiveIndex(index)}
-                className={cn(
-                  'h-1.5 rounded-full transition-all duration-300',
-                  index === activeIndex ? 'w-9 bg-primary' : 'w-4 bg-white/30 hover:bg-white/50',
-                )}
-              />
+                className="flex h-8 w-8 items-center justify-center"
+              >
+                <span
+                  className={cn(
+                    'h-1.5 rounded-full transition-all duration-300',
+                    index === activeIndex ? 'w-9 bg-primary' : 'w-4 bg-white/30 hover:bg-white/50',
+                  )}
+                />
+              </button>
             ))}
           </div>
         )}

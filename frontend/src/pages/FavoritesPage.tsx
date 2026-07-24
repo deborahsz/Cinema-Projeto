@@ -17,7 +17,12 @@ export function FavoritesPage() {
         description={isEmpty ? undefined : `${favorites.length} filme(s) salvo(s)`}
         action={
           !isEmpty && (
-            <Button variant="ghost" size="sm" onClick={clearFavorites}>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={clearFavorites}
+              className="h-10 w-full sm:w-auto"
+            >
               <Trash2 />
               Limpar tudo
             </Button>

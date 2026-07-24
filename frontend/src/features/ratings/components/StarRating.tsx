@@ -21,7 +21,7 @@ export function StarRating({
   value,
   onChange,
   readOnly = false,
-  size = 28,
+  size = 32,
   className,
 }: StarRatingProps) {
   const [hoverValue, setHoverValue] = useState<number | null>(null)
@@ -67,16 +67,17 @@ export function StarRating({
 
             {!readOnly && (
               <>
+                {/* `before` amplia a área de toque sem alterar o tamanho visual da estrela. */}
                 <button
                   type="button"
-                  className="absolute inset-y-0 left-0 z-10 w-1/2 cursor-pointer"
+                  className="absolute inset-y-0 left-0 z-10 w-1/2 cursor-pointer before:absolute before:-inset-y-2 before:-left-1 before:content-['']"
                   aria-label={`${halfScore / 2} estrelas`}
                   onMouseEnter={() => setHoverValue(halfScore)}
                   onClick={() => handleSelect(halfScore)}
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 z-10 w-1/2 cursor-pointer"
+                  className="absolute inset-y-0 right-0 z-10 w-1/2 cursor-pointer before:absolute before:-inset-y-2 before:-right-1 before:content-['']"
                   aria-label={`${fullScore / 2} estrelas`}
                   onMouseEnter={() => setHoverValue(fullScore)}
                   onClick={() => handleSelect(fullScore)}

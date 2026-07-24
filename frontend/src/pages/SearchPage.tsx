@@ -56,7 +56,7 @@ export function SearchPage() {
           <MovieGrid isLoading />
         ) : results.length > 0 ? (
           <>
-            <p className="mb-4 text-sm text-muted-foreground">
+            <p className="mb-4 text-sm break-words text-muted-foreground">
               {data?.total_results.toLocaleString('pt-BR')} resultado(s) para{' '}
               <span className="font-medium text-foreground">&quot;{trimmedTerm}&quot;</span>
             </p>
@@ -82,7 +82,7 @@ function EmptyState({ icon, message }: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center gap-2 py-16 text-center">
       {icon}
-      <p className="text-muted-foreground">{message}</p>
+      <p className="max-w-sm break-words px-2 text-muted-foreground">{message}</p>
     </div>
   )
 }

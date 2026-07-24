@@ -56,7 +56,7 @@ export function MovieCard({ movie, className }: MovieCardProps) {
 
           <FavoriteButton
             movie={movie}
-            className="absolute top-2 left-2 translate-y-1 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 focus-visible:translate-y-0 focus-visible:opacity-100"
+            className="absolute top-2 left-2 translate-y-0 opacity-100 transition-all duration-300 sm:translate-y-1 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:focus-visible:translate-y-0 sm:focus-visible:opacity-100"
           />
         </div>
 

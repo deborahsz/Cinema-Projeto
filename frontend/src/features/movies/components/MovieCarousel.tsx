@@ -65,18 +65,24 @@ export function MovieCarousel({
           <CarouselContent>
             {isLoading
               ? Array.from({ length: SKELETON_COUNT }).map((_, index) => (
-                  <CarouselItem key={index} className="basis-1/3 sm:basis-1/4 md:basis-1/6">
+                  <CarouselItem
+                    key={index}
+                    className="basis-[42%] sm:basis-1/3 md:basis-1/4 lg:basis-1/6"
+                  >
                     <MovieCardSkeleton />
                   </CarouselItem>
                 ))
               : movies?.map((movie) => (
-                  <CarouselItem key={movie.id} className="basis-1/3 sm:basis-1/4 md:basis-1/6">
+                  <CarouselItem
+                    key={movie.id}
+                    className="basis-[42%] sm:basis-1/3 md:basis-1/4 lg:basis-1/6"
+                  >
                     <MovieCard movie={movie} />
                   </CarouselItem>
                 ))}
           </CarouselContent>
-          <CarouselPrevious className="left-1 sm:-left-4" />
-          <CarouselNext className="right-1 sm:-right-4" />
+          <CarouselPrevious className="hidden sm:-left-4 sm:flex" />
+          <CarouselNext className="hidden sm:-right-4 sm:flex" />
         </Carousel>
       )}
     </section>

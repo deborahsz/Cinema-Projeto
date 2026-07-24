@@ -14,7 +14,7 @@ export function TrailerDialog({ trailer, title, children }: TrailerDialogProps) 
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         showCloseButton
-        className="max-w-3xl overflow-hidden border-border bg-background p-0 sm:max-w-4xl"
+        className="w-[calc(100%-2rem)] max-w-3xl overflow-hidden border-border bg-background p-0 sm:w-full sm:max-w-4xl"
       >
         <DialogTitle className="sr-only">{`Trailer de ${title}`}</DialogTitle>
         <div className="aspect-video w-full">

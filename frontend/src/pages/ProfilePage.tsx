@@ -28,17 +28,19 @@ export function ProfilePage() {
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
       <PageHeader title="Perfil" description="Suas informações, estatísticas e avaliações." />
 
-      <section className="glass flex flex-col items-center gap-4 rounded-2xl p-8 text-center sm:flex-row sm:text-left">
+      <section className="glass flex flex-col items-center gap-4 rounded-2xl p-5 text-center sm:flex-row sm:p-8 sm:text-left">
         <div className="flex size-16 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
           <UserRound className="size-8" aria-hidden="true" />
         </div>
 
-        <div className="flex-1">
-          <p className="font-display text-xl font-semibold text-foreground">{user?.name}</p>
-          <p className="text-sm text-muted-foreground">{user?.email}</p>
+        <div className="min-w-0 flex-1">
+          <p className="truncate font-display text-xl font-semibold text-foreground">
+            {user?.name}
+          </p>
+          <p className="truncate text-sm text-muted-foreground">{user?.email}</p>
         </div>
 
-        <Button variant="outline" onClick={logout} className="gap-2">
+        <Button variant="outline" onClick={logout} className="h-10 w-full gap-2 sm:w-auto">
           <LogOut className="size-4" aria-hidden="true" />
           Sair
         </Button>

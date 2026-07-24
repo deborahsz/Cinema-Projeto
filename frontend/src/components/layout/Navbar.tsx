@@ -68,21 +68,33 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-2">
-          {!isSearchPage && <SearchBar className="hidden w-56 sm:block" />}
+          {!isSearchPage && <SearchBar className="hidden w-40 md:block lg:w-56" />}
 
           {status === 'authenticated' ? (
-            <div className="hidden items-center gap-1 sm:flex">
-              <Button variant="ghost" size="icon" asChild aria-label={`Perfil de ${user?.name}`}>
+            <div className="hidden items-center gap-1 md:flex">
+              <Button
+                variant="ghost"
+                size="icon"
+                asChild
+                className="size-10"
+                aria-label={`Perfil de ${user?.name}`}
+              >
                 <Link to={paths.profile}>
                   <UserRound />
                 </Link>
               </Button>
-              <Button variant="ghost" size="icon" aria-label="Sair" onClick={handleLogout}>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="size-10"
+                aria-label="Sair"
+                onClick={handleLogout}
+              >
                 <LogOut />
               </Button>
             </div>
           ) : (
-            <Button variant="ghost" size="sm" asChild className="hidden sm:inline-flex">
+            <Button variant="ghost" size="sm" asChild className="hidden h-10 md:inline-flex">
               <Link to={paths.login}>Entrar</Link>
             </Button>
           )}
@@ -108,7 +120,7 @@ function MobileMenu() {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="md:hidden" aria-label="Abrir menu">
+        <Button variant="ghost" size="icon" className="size-10 md:hidden" aria-label="Abrir menu">
           <Menu />
         </Button>
       </SheetTrigger>

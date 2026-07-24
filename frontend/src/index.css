@@ -130,7 +130,14 @@
     background-image:
       radial-gradient(60rem 60rem at 85% -10%, rgba(229, 9, 20, 0.12), transparent 55%),
       radial-gradient(50rem 50rem at 0% 0%, rgba(120, 80, 255, 0.08), transparent 50%);
-    background-attachment: fixed;
+  }
+
+  /* `fixed` custa caro em mobile/Safari (repaint no scroll); só aplicamos
+     em telas maiores, onde o ganho visual compensa o custo de repintura. */
+  @media (min-width: 768px) {
+    .dark body {
+      background-attachment: fixed;
+    }
   }
 
   #root {

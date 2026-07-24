@@ -43,16 +43,16 @@ export function MovieDetailsHero({ movie, director, trailer }: MovieDetailsHeroP
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1 }}
-            className="flex-1"
+            className="flex-1 text-center sm:text-left"
           >
-            <h1 className="font-display text-3xl font-bold text-foreground sm:text-4xl">
+            <h1 className="break-words font-display text-3xl font-bold text-foreground sm:text-4xl">
               {movie.title}
             </h1>
             {movie.tagline && (
               <p className="mt-1 text-sm text-muted-foreground italic">{movie.tagline}</p>
             )}
 
-            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
+            <div className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-muted-foreground sm:justify-start">
               {movie.vote_average > 0 && (
                 <span className="flex items-center gap-1 font-medium text-foreground">
                   <Star className="size-4 fill-rating text-rating" />
@@ -77,7 +77,7 @@ export function MovieDetailsHero({ movie, director, trailer }: MovieDetailsHeroP
             </div>
 
             {movie.genres.length > 0 && (
-              <div className="mt-4 flex flex-wrap gap-2">
+              <div className="mt-4 flex flex-wrap justify-center gap-2 sm:justify-start">
                 {movie.genres.map((genre) => (
                   <Badge key={genre.id} variant="secondary">
                     {genre.name}
@@ -99,16 +99,16 @@ export function MovieDetailsHero({ movie, director, trailer }: MovieDetailsHeroP
               </p>
             )}
 
-            <div className="mt-6 flex flex-wrap items-center gap-3">
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3 sm:justify-start">
               {trailer && (
                 <TrailerDialog trailer={trailer} title={movie.title}>
-                  <Button size="lg">
+                  <Button size="lg" className="h-11 w-full sm:w-auto">
                     <Play className="fill-current" />
                     Assistir trailer
                   </Button>
                 </TrailerDialog>
               )}
-              <FavoriteButton movie={movie} variant="full" />
+              <FavoriteButton movie={movie} variant="full" className="h-11 w-full sm:w-auto" />
             </div>
           </motion.div>
         </div>

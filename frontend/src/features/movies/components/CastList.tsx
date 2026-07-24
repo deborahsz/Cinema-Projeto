@@ -28,7 +28,7 @@ export function CastList({ cast, limit = 15 }: CastListProps) {
             const photo = getTmdbImageUrl(member.profile_path, 'w185')
 
             return (
-              <CarouselItem key={member.id} className="basis-1/3 sm:basis-1/4 md:basis-1/6">
+              <CarouselItem key={member.id} className="basis-[38%] sm:basis-1/4 md:basis-1/6">
                 <div className="flex flex-col">
                   <div className="aspect-[2/3] overflow-hidden rounded-lg bg-secondary">
                     {photo ? (
@@ -51,8 +51,8 @@ export function CastList({ cast, limit = 15 }: CastListProps) {
             )
           })}
         </CarouselContent>
-        <CarouselPrevious className="left-1 sm:-left-4" />
-        <CarouselNext className="right-1 sm:-right-4" />
+        <CarouselPrevious className="hidden sm:-left-4 sm:flex" />
+        <CarouselNext className="hidden sm:-right-4 sm:flex" />
       </Carousel>
     </section>
   )

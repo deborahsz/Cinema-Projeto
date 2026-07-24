@@ -87,7 +87,7 @@ export function MovieRating({ movieId, title, posterPath }: MovieRatingProps) {
   const isSaving = upsert.isPending || remove.isPending
 
   return (
-    <section className="glass rounded-2xl p-6">
+    <section className="glass rounded-2xl p-5 sm:p-6">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h2 className="font-display text-xl font-semibold text-foreground">Sua avaliação</h2>
         {rating && (
@@ -95,8 +95,8 @@ export function MovieRating({ movieId, title, posterPath }: MovieRatingProps) {
         )}
       </div>
 
-      <div className="mt-4 flex items-center gap-3">
-        <StarRating value={score} onChange={setScore} />
+      <div className="mt-4 flex flex-wrap items-center gap-3">
+        <StarRating value={score} onChange={setScore} size={36} />
         <span className="text-sm font-medium text-foreground">
           {score > 0 ? `${score}/10` : 'Sem nota'}
         </span>
@@ -112,11 +112,16 @@ export function MovieRating({ movieId, title, posterPath }: MovieRatingProps) {
       />
 
       <div className="mt-4 flex flex-wrap gap-2">
-        <Button onClick={handleSave} disabled={isSaving}>
+        <Button onClick={handleSave} disabled={isSaving} className="h-11 w-full sm:w-auto">
           {rating ? 'Atualizar avaliação' : 'Salvar avaliação'}
         </Button>
         {rating && (
-          <Button variant="ghost" onClick={handleRemove} disabled={isSaving} className="gap-2">
+          <Button
+            variant="ghost"
+            onClick={handleRemove}
+            disabled={isSaving}
+            className="h-11 w-full gap-2 sm:w-auto"
+          >
             <Trash2 className="size-4" />
             Remover
           </Button>

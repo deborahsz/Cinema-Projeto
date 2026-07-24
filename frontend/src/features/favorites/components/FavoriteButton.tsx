@@ -54,7 +54,7 @@ export function FavoriteButton({ movie, variant = 'icon', className }: FavoriteB
       aria-label={label}
       aria-pressed={favorited}
       title={label}
-      className={cn('size-9 rounded-full bg-black/60 hover:bg-black/80', className)}
+      className={cn('size-10 rounded-full bg-black/60 hover:bg-black/80', className)}
     >
       <Heart
         className={cn(
