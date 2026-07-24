@@ -16,7 +16,7 @@
     "lint:fix": "npm run lint:fix --workspace=frontend && npm run lint:fix --workspace=backend",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "husky"
+    "prepare": "husky || true"
   },
   "lint-staged": {
     "frontend/**/*.{ts,tsx}": [
