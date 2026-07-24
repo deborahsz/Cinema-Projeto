@@ -38,7 +38,11 @@ export function MovieDetailsPage() {
       <MovieDetailsHero movie={details.data} director={director} trailer={trailer} />
 
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
-        <MovieRating movieId={details.data.id} />
+        <MovieRating
+          movieId={details.data.id}
+          title={details.data.title}
+          posterPath={details.data.poster_path}
+        />
       </div>
 
       {credits.data && credits.data.cast.length > 0 && (

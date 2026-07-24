@@ -1,8 +1,24 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useAuth } from '@/features/auth/context/auth-context'
 import { ratingKeys } from '@/features/ratings/queryKeys'
-import { fetchRating, removeRating, upsertRating } from '@/features/ratings/api/ratings.api'
+import {
+  fetchRating,
+  fetchRatings,
+  removeRating,
+  upsertRating,
+} from '@/features/ratings/api/ratings.api'
 import type { Rating, UpsertRatingPayload } from '@/features/ratings/types'
+
+/** Lista todas as avaliações do usuário logado. */
+export function useUserRatings() {
+  const { status } = useAuth()
+
+  return useQuery({
+    queryKey: ratingKeys.list(),
+    queryFn: fetchRatings,
+    enabled: status === 'authenticated',
+  })
+}
 
 /** Busca a avaliação do usuário logado para um filme específico. */
 export function useMovieRating(movieId: number) {

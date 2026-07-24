@@ -46,14 +46,17 @@ model Favorite {
 }
 
 /// Avaliação pessoal (nota de 1 a 10, equivalente a 0.5–5 estrelas) que um
-/// usuário dá a um filme da TMDB. Uma avaliação por usuário/filme.
+/// usuário dá a um filme da TMDB. Guardamos título e pôster para listar no
+/// perfil sem novas chamadas à TMDB. Uma avaliação por usuário/filme.
 model Rating {
-  id        String   @id @default(cuid())
-  movieId   Int
-  score     Int
-  comment   String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String   @id @default(cuid())
+  movieId    Int
+  title      String   @default("")
+  posterPath String?
+  score      Int
+  comment    String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)

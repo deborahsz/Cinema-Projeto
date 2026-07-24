@@ -16,9 +16,11 @@ import { paths } from '@/routes/paths'
 
 interface MovieRatingProps {
   movieId: number
+  title: string
+  posterPath: string | null
 }
 
-export function MovieRating({ movieId }: MovieRatingProps) {
+export function MovieRating({ movieId, title, posterPath }: MovieRatingProps) {
   const { status } = useAuth()
   const { data: rating, isPending } = useMovieRating(movieId)
   const upsert = useUpsertRating()
@@ -58,7 +60,13 @@ export function MovieRating({ movieId }: MovieRatingProps) {
     }
 
     try {
-      await upsert.mutateAsync({ movieId, score, comment: comment.trim() || null })
+      await upsert.mutateAsync({
+        movieId,
+        title,
+        posterPath,
+        score,
+        comment: comment.trim() || null,
+      })
       toast.success('Avaliação salva!')
     } catch (error) {
       toast.error(getApiErrorMessage(error, 'Não foi possível salvar a avaliação.'))

@@ -3,12 +3,16 @@ import type { UpsertRatingInput } from '../schemas/rating.schema'
 
 function toRatingDTO(rating: {
   movieId: number
+  title: string
+  posterPath: string | null
   score: number
   comment: string | null
   updatedAt: Date
 }) {
   return {
     movieId: rating.movieId,
+    title: rating.title,
+    posterPath: rating.posterPath,
     score: rating.score,
     comment: rating.comment,
     updatedAt: rating.updatedAt.toISOString(),
@@ -38,10 +42,14 @@ export async function upsertRating(userId: string, input: UpsertRatingInput) {
     create: {
       userId,
       movieId: input.movieId,
+      title: input.title,
+      posterPath: input.posterPath ?? null,
       score: input.score,
       comment: input.comment ?? null,
     },
     update: {
+      title: input.title,
+      posterPath: input.posterPath ?? null,
       score: input.score,
       comment: input.comment ?? null,
     },
